@@ -3,6 +3,7 @@ package com.hencoder.hencoderpracticelayout1.practice;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 /**
@@ -30,8 +31,25 @@ public class Practice01SquareImageView extends ImageView {
 
         // 先用 getMeasuredWidth() 和 getMeasuredHeight() 取到 super.onMeasure() 的计算结果
 
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+
+        int w = getMeasuredWidth();
+        int h = getMeasuredHeight();
+
+        Log.e("TAG", "onMeasure: width===============" + width + "\nheight=================" + height);
+        Log.e("TAG", "onMeasure: w===============" + w + "\nh=================" + h);
+
         // 然后通过计算，让宽度和高度一致
 
+        if (w > h) {
+            w = h;
+        } else {
+            h = w;
+        }
+
         // 再用 setMeasuredDimension(width, height) 来保存最终的宽度和高度
+        setMeasuredDimension(w, h);
+
     }
 }
